@@ -1,0 +1,24 @@
+.list.row {
+	margin: 12px 24px 12px 12px;	
+}
+
+
+.btn-outline-warning {
+	margin-right: 4px;  
+}
+
+#button-tambahkaryawan{
+	float: right;
+	display: inline-block;
+	margin-bottom: 12px;
+	font-size: 12px;
+	font-weight: bolder;
+	letter-spacing: 1px;	
+}
+
+h4.daftarkaryawan {
+	margin-top: 12px;
+	border-bottom: solid 1px #8080801c;
+	padding-bottom: 6px;
+	margin-bottom: 34px; 	
+}

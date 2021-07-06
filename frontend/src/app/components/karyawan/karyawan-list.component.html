@@ -1,0 +1,201 @@
+<div class="list row">
+  <div class="col-md-2">
+  </div>
+
+  <div class="col-md-9">
+    <h4 class="daftarkaryawan">Daftar Karyawan</h4>
+
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Tambah Karyawan</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="title">Nama</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nama"
+            required
+            [(ngModel)]="karyawan.nama"
+            name="nama"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="description">Alamat</label>
+          <input
+            class="form-control"
+            id="alamat"
+            required
+            [(ngModel)]="karyawan.alamat"
+            name="alamat"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="description">Tanggal Lahir</label>
+          <div class="input-group">
+            <input 
+                class="form-control"
+                id="tgllahir"
+                required
+                [(ngModel)]="ngbDate"
+                name="tgllahir"
+                placeholder="yyyy-mm-dd"
+                ngbDatepicker #d="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+            </div>
+          </div>          
+        </div>
+
+        <div class="form-group">
+          <label for="description">Divisi</label>
+          <select class="form-control" id="divisi" name="divisi" [(ngModel)]="karyawan.divisi" required>
+            <option value="">Choose One</option>
+            <option value="10" >IT</option>
+            <option value="11" >HRD</option>
+            <option value="12" >Finance</option>
+          </select> 
+        </div>
+
+        <div class="form-group">
+          <label for="description">Status</label>
+          <select class="form-control" id="status" name="status" [(ngModel)]="karyawan.status" required>
+            <option value="">Choose One</option>
+            <option value="tetap" >Tetap</option>
+            <option value="kontrak" >Kontrak</option>
+          </select> 
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="simpanKaryawan()">Save</button>
+      </div>
+    </ng-template>
+
+    <button class="btn btn-lg btn-outline-primary" id="button-tambahkaryawan" (click)="open(content)">Tambah Karyawan</button>
+
+
+
+    <ng-template #editModal let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Edit Karyawan</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="title">NIK</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nama"
+            readonly
+            [(ngModel)]="edit.nik"
+            name="nama"
+          />
+        </div>
+
+
+        <div class="form-group">
+          <label for="title">Nama</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nama"
+            required
+            [(ngModel)]="edit.nama"
+            name="nama"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="description">Alamat</label>
+          <input
+            class="form-control"
+            id="alamat"
+            required
+            [(ngModel)]="edit.alamat"
+            name="alamat"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="description">Tanggal Lahir</label>
+          <div class="input-group">
+            <input 
+                class="form-control"
+                id="tgllahir"
+                required
+                [(ngModel)]="ngbDate"
+                name="tgllahir"
+                placeholder="yyyy-mm-dd"
+                ngbDatepicker #d="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+            </div>
+          </div>          
+        </div>
+
+        <div class="form-group">
+          <label for="description">Divisi</label>
+          <select class="form-control" id="divisi" name="divisi" [(ngModel)]="edit.divisi" required>
+            <option value="">Choose One</option>
+            <option value="10" >IT</option>
+            <option value="11" >HRD</option>
+            <option value="12" >Finance</option>
+          </select> 
+        </div>
+
+        <div class="form-group">
+          <label for="description">Status</label>
+          <select class="form-control" id="status" name="status" [(ngModel)]="edit.status" required>
+            <option value="">Choose One</option>
+            <option value="tetap" >Tetap</option>
+            <option value="kontrak" >Kontrak</option>
+          </select> 
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="updateKaryawan()">Update</button>
+      </div>
+    </ng-template>
+
+
+
+    <table class="table table-striped">
+      <thead>
+        <tr> 
+          <th>NIK</th>
+          <th>Nama</th>
+          <th>Alamat</th>
+          <th>Tgl Lahir</th>
+          <th>Divisi</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let karyawan of semuakaryawan; let i = index">
+          <td>{{karyawan.nik}}</td>
+          <td>{{karyawan.nama}}</td>
+          <td>{{karyawan.alamat}}</td>
+          <td>{{karyawan.tgllahir}}</td>
+          <td>{{karyawan.divisi}}</td>
+          <td>{{karyawan.status}}</td>
+          <td>
+            <button class="btn btn-sm btn-outline-warning" (click)="editKaryawan(editModal, karyawan)">Edit</button>
+            <button class="btn btn-sm btn-outline-danger" (click)="deleteKaryawan(karyawan.nik)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
